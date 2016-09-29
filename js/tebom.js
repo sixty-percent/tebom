@@ -25,7 +25,7 @@
         var mirror = self.find('.inner-item');
 
         switch (self.data('type')) {
-          case 'h1':
+          case 'h3':
             swal({
               title: '見出しを編集',
               input: 'text',
@@ -44,7 +44,7 @@
                 });
               }
             }).then(function(result) {
-              self.after("<div class='content-item'><h1 class='inner-item'>" + result + "</h1><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+              self.after("<div class='content-item'><h3 class='inner-item'>" + result + "</h3><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
               self.remove();
               swal.close();
             });
@@ -211,7 +211,7 @@
         })
       });
 
-      $(".add-h1").click(function(){
+      $(".add-h3").click(function(){
         swal({
           title: '見出しを入力',
           input: 'text',
@@ -229,7 +229,7 @@
             });
           }
         }).then(function(result) {
-          $(".preview-area").append("<div class='content-item' data-type='h1'><h1 class='inner-item'>" + result + "</h1><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+          $(".preview-area").append("<div class='content-item' data-type='h3'><h3 class='inner-item'>" + result + "</h3><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
           swal.close();
         })
       });
@@ -292,7 +292,7 @@
         }).then(function(file) {
           var reader = new FileReader;
           reader.onload = function(e) {
-            $(".preview-area").append("<div class='content-item' data-type='img'><img style='max-width: 900px;' class='inner-item' src='" + e.target.result + "'><div class='edit-menu'><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+            $(".preview-area").append("<div class='content-item' data-type='img'><img style='width: 100%;' class='inner-item' src='" + e.target.result + "'><div class='edit-menu'><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
             swal.close();
           };
           reader.readAsDataURL(file);
@@ -317,7 +317,7 @@
             });
           }
         }).then(function(result) {
-          $(".preview-area").append("<div class='content-item' data-type='img-url'><img style='max-width: 900px' class='inner-item' src='" + result + "'><div class='edit-menu'><a class='edit-item'><i class='icon ion-edit'></i></a><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+          $(".preview-area").append("<div class='content-item' data-type='img-url'><img style='width: 100%' class='inner-item' src='" + result + "'><div class='edit-menu'><a class='edit-item'><i class='icon ion-edit'></i></a><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
           swal.close();
         })
       });
@@ -354,9 +354,19 @@
 
         $('.hr-wrapper').css('padding', '0')
         $('.preview-inner').html($('.preview-area').html());
+
+        $('.fkr-original-title').html($('#article-title').val());
+
         $('.preview').toggle();
 
         $('.preview-area').html(content);
+      });
+
+      $('.preview-close-btn').click(function(){
+
+        $('.preview-area').toggle();
+        $('.preview').toggle();
+
       });
 
       $('.remove-item').click(function(){

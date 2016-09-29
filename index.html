@@ -3,35 +3,355 @@
   <head>
     <meta charset="utf-8">
     <title>Tebom</title>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/thousandjapan/qwerty/master/css/qwerty.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
     <link rel="stylesheet" href="css/sweetalert2.css" media="screen" title="no title">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="screen" title="no title">
     <link rel="stylesheet" href="css/tebom.css" media="screen" title="no title">
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
   </head>
   <body>
-  <div class="pack" style="margin-top: 108px;">
-    <div class="toolbar">
-      <ul class="tool-list">
-        <div class="tool-toggle-btn"><i class="icon ion-close"></i></div>
-        <li class="tool-item add-h1"><i class="icon ion-eye"></i>&nbsp;見出し</li>
-        <li class="tool-item add-p"><i class="icon ion-edit"></i>&nbsp;文章</li>
-        <li class="tool-item add-img"><i class="icon ion-android-upload"></i>&nbsp;画像アップロード</li>
-        <li class="tool-item add-img-url"><i class="icon ion-image"></i>&nbsp;画像(URL)</li>
-        <li class="tool-item add-line"><i class="icon ion-minus"></i>&nbsp;ライン</li>
-        <li class="tool-item show-preview"><i class="icon ion-eye"></i>&nbsp;プレビュー</li>
-        <li class="tool-item remove-item"><i class="icon ion-trash-b"></i>&nbsp;削除</li>
-      </ul>
-    </div>
+  <div class="tbm-pack" style="margin-top: 32px;">
     <div class="row">
       <div class="twelve cols">
+        <div class="title-input">
+          <span>記事のタイトル</span>
+          <input id="article-title" type="text" name="name" placeholder="タイトルを入力してください。">
+        </div>
         <div class="preview-area">
+        </div>
+        <div class="toolbar">
+          <ul class="tool-list">
+            <div class="tool-toggle-btn"><i class="icon ion-close"></i></div>
+            <li class="tool-item add-h3"><i class="icon ion-eye"></i>&nbsp;見出し</li>
+            <li class="tool-item add-p"><i class="icon ion-edit"></i>&nbsp;文章</li>
+            <li class="tool-item add-img"><i class="icon ion-android-upload"></i>&nbsp;画像アップロード</li>
+            <li class="tool-item add-img-url"><i class="icon ion-image"></i>&nbsp;画像(URL)</li>
+            <li class="tool-item add-line"><i class="icon ion-minus"></i>&nbsp;ライン</li>
+            <li class="tool-item show-preview"><i class="icon ion-eye"></i>&nbsp;プレビュー</li>
+            <li class="tool-item remove-item"><i class="icon ion-trash-b"></i>&nbsp;削除</li>
+          </ul>
         </div>
         <div class="preview">
           <p style="position: absolute; top: 8px; right: 8px">
-            <i class="icon ion-eye"></i>&nbsp;プレビュー中
+            <div class="preview-close-btn"><i class="icon ion-eye"></i>&nbsp;プレビューを閉じる&nbsp;<i class="ion-close"></i></div>
           </p>
-          <div class="preview-inner">
+          <header style="position: fixed; z-index: 1500; height: 56px; box-shadow: 0 0 0 rgba(255,255,255,0);border-bottom: none;" class="menu-header">
+            <div class="header-wrapper" style="display: flex;">
+              <div class="header-left" style="width: 180px;">
+              </div>
+              <div class="header-center">
+              <a href="#"><h4 class="logo" style="color:#222; text-transform: uppercase; padding-top: 4px;">FUKROO</h4><a>
+              </div>
+              <div class="header-right">
+              <ul class="header-right-icons">
+                <a class="auth-modal-trig"><li class="btn-hook"><img src="http://fuk-roo.com/img/hanger.png" alt="" style="width: 24px; height: 24px;"/></li></a>
+                <div class="dropdown dropdown-usermenu">
+                  <a href="#">
+                    <li class="btn-user">
+                      <img src="http://fuk-roo.com/img/user-placeholder.png" class="hook-user-img" style="float: none" /><span>ログイン</span>
+                    </li>
+                  </a>
+                </div>
+              </ul>
+              </div>
+            </div>
+          </header>
+          <header style="position: fixed; z-index: 2; margin-top: 55px; height: 44px; line-height: 44px;" class="menu-header">
+            <div class="header-wrapper" style="display: flex;">
+              <div class="header-left" style="width: 40px;">
+              </div>
+              <div class="header-center">
+                <div class="fkr-sidebar-nav-ul">
+                  <a href="#">
+                    <li class="">TOP</li>
+                  </a>
+                  <a href="#">
+                    <li class="fkr-li-active">News</li>
+                  </a>
+                  <a href="#">
+                    <li class="">Event・Shop</li>
+                  </a>
+                  <a href="#">
+                    <li class="">Voice</li>
+                  </a>
+                  <a href="#">
+                    <li class="">Collection</li>
+                  </a>
+                  <a href="#">
+                    <li class="">Item</li>
+                  </a>
+                  <a href="#">
+                    <li class="">Originals</li>
+                  </a>
+                </div>
+              </div>
+              <div class="header-right">
+                <ul class="header-right-icons">
+                  <a href="#"><li class="btn-search"><i class="icon ion-ios-search-strong"></i></li></a>
+                </ul>
+              </div>
+            </div>
+          </header>
+          <div id="container">
+  <div class="site-overlay"></div>
+  <div class="wrapper">
 
-          </div>
+    <div class="pack modified">
+<div class="nine cols">
+<h1 class="fkr-original-title">タイトルが未設定です。</h1>
+<p class="fkr-original-description"></p>
+<div class="social">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="FUKROO" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <div class="fb-share-button" data-href="http://fuk-roo.com/originals/4" data-layout="button_count" data-size="small" data-mobile-iframe="true"></div>
+  <span class="created-at" style="color: #555;">2016/09/21 17:16</span>
+</div>
+<hr style="margin: 16px;">
+<div class="fkr-original-body preview-inner">
+</div>
+<hr style="margin: 16px;">
+<div class="social">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="FUKROO" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <div class="fb-share-button" data-href="http://fuk-roo.com/originals/4" data-layout="button_count" data-size="small" data-mobile-iframe="true"></div>
+</div>
+</div>
+<div class="three cols">
+  <div class="card tx-center" style="margin-bottom: 20px;">
+    <div class="head">
+      <a href="/users/1">FUKROO 編集部</a>
+    </div>
+    <div class="body">
+      <a href="/users/1">
+        <img src="https://firebasestorage.googleapis.com/v0/b/fukroo-ios-4c215.appspot.com/o/images%2Ffkr-icon.png?alt=media&amp;token=df1930b5-ace4-48e0-b18f-7aefe37b93b2" alt="FUKROO 編集部" style="width: 80px;height: 80px;border: 1px #e3e3e3 solid; border-radius: 50%;"/>
+</a>          <p style="padding: 0 16px;">
+        FUKROOはファッションに特化したソーシャルキュレーションメディア
+      </p>
+    </div>
+    <div class="foot">
+        <form class="button_to" method="get" action="/auth"><button class="full-x card-btn tx-center follow-btn" type="submit">
+          <i class="icon ion-plus"></i>&nbsp;フォローする
+</button></form>        </div>
+  </div>
+  <div class="twelve cols hide-xs" style="padding: 0px">
+<h5 class="tx-center fkr-heading"><span>Pick Up</span></h5>
+<div class="fkr-article-summary" style="height: 90px; display: flex">
+  <a href="/articles/1979">
+    <div class="summary-left">
+      <div class="summary-image">
+        <img src="https://firebasestorage.googleapis.com/v0/b/fukroo-web.appspot.com/o/1474881159.jpg?alt=media&amp;token=12a36b23-ad8c-4a71-883d-c2b2baa04c9d" alt="ファッションとデザインの合同展示会「rooms33」現地レポート　−第2弾− | FUKROO" />
+      </div>
+    </div>
+    <div class="summary-right">
+      <div class="summary-title">
+        <h3 style="margin: 0">ファッションとデザインの合同展示会「rooms33」現地レポート　−第2弾− | FUKROO</h3>
+      </div>
+      <p class="left meta-provider"><i class="icon ion-earth"></i> FUKROO [フクロー]</p>
+    </div>
+  </a>
+</div>
+<hr class="fkr-hr" style="margin: 16px 0">
+</div>
+
+</div>
+</div>
+<style media="screen">
+.fkr-original-title {
+font-size: 24px;
+padding: 16px;
+}
+.fkr-original-description {
+overflow: hidden;
+margin: 0;
+padding-left: 16px;
+padding-right: 16px;
+padding-bottom: 16px;
+color: #555;
+}
+.fkr-original-body {
+overflow: hidden;
+padding: 16px;
+}
+.fkr-original-body img {
+object-fit: cover;
+display: block;
+margin-left: auto;
+margin-right: auto;
+height: 100% !important;
+width: 80% !important;
+}
+.fkr-original-body iframe {
+height: 500px !important;
+width: 100% !important;
+}
+
+@media(max-width: 768px) {
+.fkr-original-title {
+  padding-top: 0px;
+  font-size: 20px;
+}
+.fkr-original-description {
+  overflow: hidden;
+  margin: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  font-size: 12px;
+  color: #555;
+}
+.fkr-original-body h3 {
+  font-size: 16px;
+}
+.fkr-original-body img {
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100% !important;
+  width: 100% !important;
+}
+.fkr-original-body iframe {
+  height: 33.3333333% !important;
+  width: 100% !important;
+}
+.social > .fb_iframe_widget > span {
+  padding: 4px !important;
+  vertical-align: middle !important;
+}
+.social > * { vertical-align: bottom; margin: 4px; }
+.created-at {
+  vertical-align: middle !important;
+  font-size: 12px;
+}
+}
+
+@media (min-width: 550px){
+.modified .nine.cols {
+    width: 71%;
+}
+.modified .three.cols {
+    width: 28%;
+}
+}
+.button_to {
+display: inline;
+}
+.following-btn {
+border: none;
+color: rgba(173,30,37,1) !important;
+}
+.card-btn {
+border-left: none !important;
+}
+.follow-btn {
+border: none;
+}
+.card form {
+padding: 0;
+width: 100%;
+}
+button {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+outline: none;
+}
+
+h3 {
+font-size: 20px;
+}
+
+.social { margin-left: 16px;}
+.social > * { vertical-align: bottom; margin: 4px; }
+</style>
+
+      <a class="auth-modal-trig float-hook-button"><img src="http://fuk-roo.com/img/hook-hanger.png" alt="" /></a>
+
+  </div>
+</div>
+
+  <div class="wrapper" style="padding: 0; background-color:#fff; box-shadow: -4px 0px 8px rgba(0,0,0,0.15)">
+<div class="row footer-banner-wrapper">
+<div class="pack">
+  <div class="services">
+    <div class="service-image tx-center">
+      <img class="alignnone size-medium wp-image-43" src="http://fuk-roo.com/img/iphone-mockup.png" alt="screen_shot" width="540" height="520">
+    </div>
+    <div class="service-info">
+      <p class="logo" style="font-size: 36px; letter-spacing: 8px; margin: 100px 0 52px 0">FUKROO</p>
+      <h3 style="font-size: 20px; margin-bottom: 24px; font-weight: 100">Fashioin Media Platform.</h3>
+      <div class="app-badges">
+        <a href="https://itunes.apple.com/jp/app/fukroo-fasshonni-te-huashitasosharukyureshonmedia/id1135691070?mt=8"><img class="as-badge" src="http://fuk-roo.com/img/as-badge.png" width="150"><a/>
+        <a href="#"><img class="gp-badge" src="http://fuk-roo.com/img/gp-badge.png" width="150" style="border-radius: 5px;"></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="row footer-info-wrapper">
+<div class="tx-center">
+  <div class="fb-page" data-href="https://www.facebook.com/FUKROO-552532358260485/" data-width="380" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"></div>
+</div>
+<div class="footer-social-icons" style="color: #333;">
+  <a href="https://twitter.com/fuk_roo" target="_blank"><span class="icon ion-social-twitter"></span></a>
+  <a href="https://www.facebook.com/FUKROO-552532358260485/" target="_blank"><span class="icon ion-social-facebook"></span></a>
+  <a href="https://plus.google.com/u/1/111720859338068078087/posts" target="_blank"><span class="icon ion-social-googleplus"></span></a>
+  <a href="https://www.instagram.com/fukroo_official/" target="_blank"><span class="icon ion-social-instagram"></span></a>
+</div>
+<br>
+<div class="tx-center">
+  <ul class="inline-list tx-center">
+    <li class="footer-list"><a href="http://thousandjapan.com/" target="_blank">運営会社</a></li>
+    <li class="footer-list"><a href="/terms">利用規約</a></li>
+    <li class="footer-list"><a href="/policy">プライバシーポリシー</a></li>
+    <li class="footer-list"><a href="/contact">お問い合わせ</a></li>
+    <li class="footer-list"><a href="/about" target="_blank">このサービスについて</a></li>
+  </ul>
+  <p class="tx-center">Copyright © THOUSAND JAPAN CO., LTD. 2016</p>
+</div>
+</div>
+</div>
+<style media="screen">
+@media (max-width: 800px) {
+iframe.snapwidget-widget {
+  width: 50%;
+}
+.snap-widget-wrapper {
+  margin: 0; padding: 0; width:100%;
+}
+.service-info {
+  margin: 0;
+}
+}
+.footer-social-icons {
+margin-top: 36px;
+}
+.footer-social-icons a {
+font-size: 20px;
+padding: 1px 0 0 1px;
+display: inline-block;
+border: solid 3px #333;
+color: #333;
+width: 32px;
+height: 32px;
+border-radius: 50%;
+-webkit-transition: all .3s ease;
+-moz-transition: all .3s ease;
+-o-transition: all .3s ease;;
+transition: all .3s ease;
+}
+.footer-social-icons a span{
+padding-bottom: 12px;
+}
+.footer-social-icons a:hover {
+border: solid 3px #333;
+background-color: #333;
+color: #fff;
+width: 32px;
+height: 32px;
+border-radius: 50%;
+}
+</style>
         </div>
       </div>
     </div>
