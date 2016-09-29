@@ -44,7 +44,7 @@
                 });
               }
             }).then(function(result) {
-              self.after("<div class='content-item'><h3 class='inner-item'>" + result + "</h3><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+              self.after("<div class='content-item'><h3 class='inner-item'>" + result + "</h3><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
               self.remove();
               swal.close();
             });
@@ -69,24 +69,16 @@
                 });
               }
             }).then(function(result) {
-              self.after("<div class='content-item'><p class='inner-item'>" + result + "</p><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-paintbrush></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-checkbox-blank'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+              self.after("<div class='content-item'><p class='inner-item'>" + result + "</p><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
               self.remove();
               swal.close();
             })
             break;
 
           default:
-            alert(self.data('type'));
+            swal("このアイテムは編集できません。 アイテムタイプ：" + self.data('type'));
             break;
         }
-      });
-
-      $(document).on('click','.ion-paintbrush',function(){
-        var self = $(this).parents('.content-item');
-        var item = self.find('.inner-item');
-
-        item.toggleClass('item-bold');
-        return false;
       });
 
       $(document).on('click','.ion-link',function(){
@@ -114,6 +106,8 @@
           item.wrap("<a href='" + result + "'></a>");
         });
 
+        var item = self;
+        itemUpdate(item);
         return false;
       });
 
@@ -127,6 +121,9 @@
           prev.before(self.prop('outerHTML'));
           self.remove();
         }
+
+        var item = self;
+        itemUpdate(item);
         return false;
       });
 
@@ -140,6 +137,9 @@
           next.after(self.prop('outerHTML'));
           self.remove();
         }
+
+        var item = self;
+        itemUpdate(item);
         return false;
       });
 
@@ -159,6 +159,8 @@
           item.css('font-size', newitemFontSize);
         }
 
+        var item = self;
+        itemUpdate(item);
         return false;
       });
 
@@ -178,6 +180,8 @@
           item.css('font-size', newitemFontSize);
         }
 
+        var item = self;
+        itemUpdate(item);
         return false;
       });
 
@@ -208,7 +212,11 @@
           var target = self.find('.inner-item');
           target.css('color', result);
           target.attr('color', result);
-        })
+          itemUpdate(self);
+          return false;
+        });
+
+
       });
 
       $(".add-h3").click(function(){
@@ -229,7 +237,7 @@
             });
           }
         }).then(function(result) {
-          $(".preview-area").append("<div class='content-item' data-type='h3'><h3 class='inner-item'>" + result + "</h3><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+          $(".preview-area").append("<div class='content-item' data-type='h3'><h3 class='inner-item'>" + result + "</h3><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
           swal.close();
         })
       });
@@ -253,7 +261,7 @@
             });
           }
         }).then(function(result) {
-          $(".preview-area").append("<div class='content-item box-item' data-type='box'><p class='inner-item'>" + result + "</p><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+          $(".preview-area").append("<div class='content-item box-item' data-type='box'><p class='inner-item'>" + result + "</p><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
           swal.close();
         })
       });
@@ -277,7 +285,7 @@
             });
           }
         }).then(function(result) {
-          $(".preview-area").append("<div class='content-item' data-type='p'><p class='inner-item'>" + result + "</p><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-paintbrush'></i><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+          $(".preview-area").append("<div class='content-item' data-type='p'><p class='inner-item'>" + result + "</p><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
           swal.close();
         })
       });
@@ -292,7 +300,7 @@
         }).then(function(file) {
           var reader = new FileReader;
           reader.onload = function(e) {
-            $(".preview-area").append("<div class='content-item' data-type='img'><img style='width: 100%;' class='inner-item' src='" + e.target.result + "'><div class='edit-menu'><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+            $(".preview-area").append("<div class='content-item' data-type='img'><img style='width: 100%;' class='inner-item' src='" + e.target.result + "'><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
             swal.close();
           };
           reader.readAsDataURL(file);
@@ -317,19 +325,34 @@
             });
           }
         }).then(function(result) {
-          $(".preview-area").append("<div class='content-item' data-type='img-url'><img style='width: 100%' class='inner-item' src='" + result + "'><div class='edit-menu'><a class='edit-item'><i class='icon ion-edit'></i></a><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+          $(".preview-area").append("<div class='content-item' data-type='img-url'><img style='width: 100%' class='inner-item' src='" + result + "'><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
           swal.close();
         })
       });
 
       $(".add-line").click(function(){
-        $(".preview-area").append("<div class='content-item hr-wrapper' data-type='hr'><hr class='inner-item' /><div class='edit-menu'><i class='icon ion-arrow-expand'></i><i class='icon ion-arrow-shrink'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
+        $(".preview-area").append("<div class='content-item hr-wrapper' data-type='hr'><hr class='inner-item' /><div class='edit-menu'><i class='icon ion-edit'></i><i class='icon ion-android-color-palette'></i><i class='icon ion-trash-b'></i><i class='icon ion-link'></i><i class='icon ion-arrow-up-b'></i><i class='icon ion-arrow-down-b'></i></div></div>");
       });
 
       $(document).on('click','.content-item',function(){
         $(".edit-menu").hide();
         $(this).find(".edit-menu").toggle();
+
+
+        var item = $(this);
+        itemUpdate(item);
       });
+
+      function itemUpdate(item) {
+        var currentColor = item.find('.inner-item').css('color');
+
+        $('.item-controller').html("<h3 class=''>アイテム情報</h3>" +
+                                　　"<p class=''>タイプ：" + item.data('type') + "</p>" +
+                                   "<p class=''>フォントサイズ：" + item.find('.inner-item').css('font-size') + "&nbsp;<i class='icon ion-android-add-circle'></i>&nbsp;<i class='icon ion-android-remove-circle'></i></p>" +
+                                   "<p class=''>余白（margin）：" + item.find('.inner-item').css('margin') + "&nbsp;<i class='icon ion-android-add-circle'></i>&nbsp;<i class='icon ion-android-remove-circle'></i></p>" +
+                                   "<p color='" + currentColor + "' style='color: " + currentColor + "'>●&nbsp;現在の色" + currentColor + "&nbsp;</p>"
+        );
+      }
 
       $('.tool-toggle-btn').click(function(){
         $(this).find(".icon").toggleClass("ion-plus");
